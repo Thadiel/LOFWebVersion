@@ -30,7 +30,7 @@ export default function HomePage() {
         </Pressable>
         </Link>
         <Pressable style={styles.log}>
-            <LogBG width={Dimensions.get("screen").width} height={Dimensions.get('screen').width*1.24}>
+            <LogBG width={Dimensions.get("screen").width} height={Dimensions.get('screen').width*1.23}>
             </LogBG>
         </Pressable>
         

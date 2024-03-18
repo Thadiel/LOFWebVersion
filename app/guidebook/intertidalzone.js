@@ -8,7 +8,7 @@ const lightblue = '#68c8cb';
 const blue = '#3a899b';
 const darkblue = '#191516a';
 
-export default function Guidebook() {
+export default function InterTidal() {
     return (
         <View style={{ flexDirection: 'column' }}>
             <Navbar />

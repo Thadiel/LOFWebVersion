@@ -10,7 +10,7 @@ const lightblue = '#68c8cb';
 const blue = '#3a899b';
 const darkblue = '#191516a';
 
-export default function All() {
+export default function Animal() {
     const [info, setInfo] = useState(true);
     const [observe, setObserve] = useState(false);
     const [pfp, setPfp] = useState(false);
@@ -57,14 +57,14 @@ export default function All() {
         if (info) {
             styles.button1 = {
                 width: '50vw',
-                height: '100vh',
+                height: '50vh',
                 backgroundColor: '#3b8cc8',
                 borderTopLeftRadius: 8,
                 borderTopRightRadius: 8
             }
             styles.button2 = {
                 width: '50vw',
-                height: '100vh',
+                height: '50vh',
                 backgroundColor: blue,
                 borderTopLeftRadius: 8,
                 borderTopRightRadius: 8
@@ -94,14 +94,14 @@ export default function All() {
         else {
             styles.button1 = {
                 width: '50vw',
-                height: '100vh',
+                height: '50vh',
                 backgroundColor: blue,
                 borderTopLeftRadius: 8,
                 borderTopRightRadius: 8
             }
             styles.button2 = {
                 width: '50vw',
-                height: '100vh',
+                height: '50vh',
                 backgroundColor: '#3b8cc8',
                 borderTopLeftRadius: 8,
                 borderTopRightRadius: 8

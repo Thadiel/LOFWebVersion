@@ -8,7 +8,7 @@ const lightblue = '#68c8cb';
 const blue = '#3a899b';
 const darkblue = '#191516a';
 
-export default function Treasure() {
+export default function Shaws() {
     return (
         <View style={{ flexDirection: 'column', height: '100vh', width: '100vw' }}>
             <Navbar />

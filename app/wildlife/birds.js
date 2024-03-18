@@ -8,7 +8,7 @@ const lightblue = '#68c8cb';
 const blue = '#3a899b';
 const darkblue = '#191516a';
 
-export default function Wildlife() {
+export default function Birds() {
     const orgs = getOrgs();
     const [birds, setBirds] = useState(orgs.filter(org =>
                                         org.type == "bird"
