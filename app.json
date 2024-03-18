@@ -1,5 +1,8 @@
 {
   "expo": {
+    "experiments": {
+      "baseUrl": "/LOFWebVersion"
+    },
     "name": "LOFWeb",
     "slug": "LOFWeb",
     "scheme": "LOFWeb",
@@ -25,6 +28,7 @@
       }
     },
     "web": {
+      
       "favicon": "./assets/favicon.png",
       "bundler": "metro"
     },
