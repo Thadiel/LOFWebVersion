@@ -16,7 +16,7 @@ export default function MapPage() {
             <Navbar />
             <View style={{ backgroundColor: blue, minHeight: '90vh' }}>
                 <View style={styles.container}>
-                    <APIProvider apiKey={"AIzaSyDT5qet5HsLSbz7C3ftDT3lFvlz4weJKOs"}>
+                    <APIProvider apiKey={process.env.GOOGLE_MAPS_API_KEY}>
                         <Map defaultCenter={{ lat: 22.54992, lng: 0 }}
                             defaultZoom={3}
                             gestureHandling={'greedy'}
