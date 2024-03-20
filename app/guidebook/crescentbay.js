@@ -28,13 +28,14 @@ export default function Crescent() {
                 <View style={styles.container}>
                     <Text style={styles.title}>Crescent Bay</Text>
                     <Image style={styles.image} source={CrescentPic} />
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                        <Pressable onPress={() => scrollto(map)} style={{ backgroundColor: 'lightgray', borderRadius: 10, flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', width: '25vw', height: '5vh', paddingHorizontal: 5 }}>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between',width:'80vw' }}>
+                        <Pressable onPress={() => scrollto(map)} style={{ backgroundColor: 'lightgray', borderRadius: 10, flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', width: '30vw', height: '5vh', paddingHorizontal: 5 }}>
                             <FontAwesome name="map-marker" size={24} color="black" />
                             <Text style={{ justifyContent: 'center', fontWeight: 'bold' }}>Location</Text>
                         </Pressable>
-                        <View style={{ backgroundColor: 'lightgray', borderRadius: 10, flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', width: '43vw', height: '5vh' }}>
-                            <Text style={{ fontSize: 12, fontWeight: 'bold' }}>Hours: 6am - 10pm, Year Round</Text>
+                        <View style={{ backgroundColor: 'lightgray', borderRadius: 10,  justifyContent: 'space-around', alignItems: 'center', width: '40vw', height: '5vh' }}>
+                            <Text style={{ fontSize: 12, fontWeight: 'bold' }}>Hours: 6am - 10pm</Text>
+                            <Text style={{ fontSize: 12, fontWeight: 'bold' }}> YEAR ROUND</Text>
                         </View>
                     </View>
                     <Text>Crescent Bay is located where Cliff Drive intercepts North Coast Highway. This beach is well-known for its stunning views and body-surfing conditions.</Text>
@@ -62,7 +63,7 @@ export default function Crescent() {
                     </View>
                     <View ref={map} style={styles.mapContainer}>
                         <APIProvider apiKey={process.env.EXPO_PUBLIC_GOOGLE_MAPS_API_KEY}>
-                            <Map Zoom={14} Center={initial} mapTypeControl={false} streetViewControl={false} zoomControl={false}
+                            <Map Zoom={14} Center={initial} gestureHandling="none"
                                 mapId={process.env.EXPO_PUBLIC_GOOGLE_MAP_ID} style={{ borderRadius: 20 }}>
                             </Map>
                         </APIProvider>
@@ -70,48 +71,48 @@ export default function Crescent() {
                     <View style={{ width: '70vw' }}>
                         <Text style={styles.subheading}>Amenities</Text>
                         <View style={{ flexDirection: 'row', width: '80vw', justifyContent: 'center' }}>
-                            <View style={[styles.grid1, { borderBottomWidth: 1 }]}>
-                                <Text style={{ width: '20vw', fontSize: 17, fontWeight: 'bold', textAlign: 'center' }}>Parking</Text>
-                                <Text style={{ width: '15vw', fontSize: 20, textAlign: 'center' }}>❌</Text>
+                            <View style={[styles.grid1, { borderBottomWidth: 2 }]}>
+                                <Text style={{ width: '25vw', fontSize: '1rem', fontWeight: 'bold', textAlign: 'center' }}>Parking</Text>
+                                <Text style={{ width: '15vw', fontSize: '1.5rem', textAlign: 'center' }}>❌</Text>
                             </View>
-                            <View style={[styles.grid2, { borderBottomWidth: 1 }]}>
-                                <Text style={{ width: '30vw', fontSize: 17, textAlign: 'center' }}>Street Parking</Text>
-                            </View>
-                        </View>
-                        <View style={{ flexDirection: 'row', width: '80vw', justifyContent: 'center' }}>
-                            <View style={[styles.grid1, { borderBottomWidth: 1, borderTopWidth: 1 }]}>
-                                <Text style={{ width: '20vw', fontSize: 17, fontWeight: 'bold', textAlign: 'center' }}>Bus Stop</Text>
-                                <Text style={{ width: '15vw', fontSize: 20, textAlign: 'center' }}>✅</Text>
-                            </View>
-                            <View style={[styles.grid2, { borderTopWidth: 1, borderBottomWidth: 1 }]}>
-                                <Text style={{ width: '30vw', fontSize: 17, textAlign: 'center' }}>N. Coast Hwy. Route 1-99</Text>
+                            <View style={[styles.grid2, { borderBottomWidth: 2 }]}>
+                                <Text style={{ width: '30vw', fontSize: '1rem', textAlign: 'center' }}>Street Parking</Text>
                             </View>
                         </View>
                         <View style={{ flexDirection: 'row', width: '80vw', justifyContent: 'center' }}>
-                            <View style={[styles.grid1, { borderBottomWidth: 1, borderTopWidth: 1 }]}>
-                                <Text style={{ width: '20vw', fontSize: 17, fontWeight: 'bold', textAlign: 'center' }}>Trolley Stop </Text>
-                                <Text style={{ width: '15vw', fontSize: 20, textAlign: 'center' }}>✅</Text>
+                            <View style={[styles.grid1, { borderBottomWidth: 2}]}>
+                                <Text style={{ width: '25vw', fontSize: '1rem', fontWeight: 'bold', textAlign: 'center' }}>Bus Stop</Text>
+                                <Text style={{ width: '15vw', fontSize: '1.5rem', textAlign: 'center' }}>✅</Text>
                             </View>
-                            <View style={[styles.grid2, { borderTopWidth: 1, borderBottomWidth: 1 }]}>
-                                <Text style={{ width: '30vw', fontSize: 17, textAlign: 'center' }}>1 and 6</Text>
-                            </View>
-                        </View>
-                        <View style={{ flexDirection: 'row', width: '80vw', justifyContent: 'center' }}>
-                            <View style={[styles.grid1, { borderBottomWidth: 1, borderTopWidth: 1 }]}>
-                                <Text style={{ width: '20vw', fontSize: 17, fontWeight: 'bold', textAlign: 'center' }}>Bathroom  </Text>
-                                <Text style={{ width: '15vw', fontSize: 20, textAlign: 'center' }}>✅</Text>
-                            </View>
-                            <View style={[styles.grid2, { borderTopWidth: 1, borderBottomWidth: 1 }]}>
-                                <Text style={{ width: '30vw', fontSize: 17, textAlign: 'center' }}>Located on Cliff Dr., End of Ramp</Text>
+                            <View style={[styles.grid2, {  borderBottomWidth: 2 }]}>
+                                <Text style={{ width: '30vw', fontSize: '1rem', textAlign: 'center' }}>N. Coast Hwy. Route 1-99</Text>
                             </View>
                         </View>
                         <View style={{ flexDirection: 'row', width: '80vw', justifyContent: 'center' }}>
-                            <View style={[styles.grid1, { borderTopWidth: 1 }]}>
-                                <Text style={{ width: '20vw', fontSize: 17, fontWeight: 'bold', textAlign: 'center' }}>Shower</Text>
+                            <View style={[styles.grid1, { borderBottomWidth:2 }]}>
+                                <Text style={{ width: '25vw', fontSize: '1rem', fontWeight: 'bold', textAlign: 'center' }}>Trolley Stop </Text>
+                                <Text style={{ width: '15vw', fontSize: '1.5rem', textAlign: 'center' }}>✅</Text>
+                            </View>
+                            <View style={[styles.grid2, { borderBottomWidth: 2 }]}>
+                                <Text style={{ width: '30vw', fontSize: '1rem', textAlign: 'center' }}>1 and 6</Text>
+                            </View>
+                        </View>
+                        <View style={{ flexDirection: 'row', width: '80vw', justifyContent: 'center' }}>
+                            <View style={[styles.grid1, { borderBottomWidth:2 }]}>
+                                <Text style={{ width: '25vw', fontSize: '1rem', fontWeight: 'bold', textAlign: 'center' }}>Bathroom  </Text>
+                                <Text style={{ width: '15vw', fontSize: '1.5rem', textAlign: 'center' }}>✅</Text>
+                            </View>
+                            <View style={[styles.grid2, {  borderBottomWidth: 2 }]}>
+                                <Text style={{ width: '30vw', fontSize: '1em', textAlign: 'center' }}>Located on Cliff Dr., End of Ramp</Text>
+                            </View>
+                        </View>
+                        <View style={{ flexDirection: 'row', width: '80vw', justifyContent: 'center' }}>
+                            <View style={[styles.grid1]}>
+                                <Text style={{ width: '25vw', fontSize: 17, fontWeight: 'bold', textAlign: 'center' }}>Shower</Text>
                                 <Text style={{ width: '15vw', fontSize: 20, textAlign: 'center' }}>✅</Text>
                             </View>
-                            <View style={[styles.grid2, { borderTopWidth: 1 }]}>
-                                <Text style={{ width: '30vw', fontSize: 17, textAlign: 'center' }}>Outdoor Shower</Text>
+                            <View style={[styles.grid2]}>
+                                <Text style={{ width: '30vw', fontSize: '1rem', textAlign: 'center' }}>Outdoor Shower</Text>
                             </View>
                         </View>
                     </View>
@@ -145,21 +146,22 @@ styles = StyleSheet.create({
         paddingLeft: '5vw',
         borderRightWidth: 1,
         justifyContent: 'space-evenly',
-        width: '35vw',
-        height: '8vh',
+        width: '40vw',
+        minHeight: '8vh',
         alignItems: 'center'
     },
     grid2: {
         borderColor: lightblue,
         borderLeftWidth: 1,
+        paddingRight: '5vw',
         width: '40vw',
         textAlign: 'center',
         justifyContent: 'center',
         alignItems: 'center'
     },
     image: {
-        height: '20vh',
-        width: '75vw',
+        height: '25vh',
+        width: '80vw',
         borderRadius: 20,
         padding: 10,
         alignSelf: 'center'
@@ -170,11 +172,11 @@ styles = StyleSheet.create({
         minWidth: '100vw'
     },
     container: {
-        margin: 20,
-        gap: 30,
+        margin: '5vw',
+        gap: 25,
         backgroundColor: 'white',
         borderRadius: 20,
-        padding: 35
+        padding: '5vw'
     },
     title: {
         color: '#064777',

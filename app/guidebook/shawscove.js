@@ -1,45 +1,181 @@
-import { AntDesign } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
 import Navbar from "../components/navbar";
 import { Link } from 'expo-router';
-import { StyleSheet, View, Text, ScrollView, Pressable } from "react-native";
+import { useRef } from "react";
+import { StyleSheet, View, Text, ScrollView, Pressable, Image } from "react-native";
+import { APIProvider, Map, AdvancedMarker } from '@vis.gl/react-google-maps';
+
+import Shaws from '../../assets/shaws.jpg'
 
 const sand = '#e3c088';
 const lightblue = '#68c8cb';
 const blue = '#3a899b';
 const darkblue = '#191516a';
 
-export default function Shaws() {
+export default function Crescent() {
+    const initial =  { lat: 33.54570202275875, lng: -117.79838512444839 };
+    const map = useRef(null);
+    const scrollto =(elementRef) => {
+        window.scrollTo({
+            top: elementRef.current.offsetTop,
+            behavior:'smooth'
+        })
+    }
     return (
         <View style={{ flexDirection: 'column', height: '100vh', width: '100vw' }}>
             <Navbar />
-            <ScrollView>
-                <View style={styles.outside}>
-                    <View style={styles.container}>
-                        <Text style={styles.title}>Shaws Cove</Text>
-                        <View style={styles.line}></View>
-                        <Text style={styles.item}>Shaw's Cove is a popular destination for divers due to the high probability of seeing aquatic life and its proximity to the kelp forest.</Text>
-                        <Text style={styles.item}>Has a low visitor count, shaw's Cove North connects to Crescent Bay South so there can be overlap amongst tidepool education</Text>
-                        <Text style={styles.item}>Access Point: Fairview St. & Cliff Dr. (stairs) </Text>
-                        <Text style={styles.item}>Recommended Parking: Residential parking along Cliff Dr.</Text>
+            <View style={styles.outside}>
+                <View style={styles.container}>
+                    <Text style={styles.title}>Shaw's Cove</Text>
+                    <Image style={styles.image} source={Shaws} />
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between',width:'80vw' }}>
+                        <Pressable onPress={() => scrollto(map)} style={{ backgroundColor: 'lightgray', borderRadius: 10, flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center', width: '30vw', height: '5vh', paddingHorizontal: 5 }}>
+                            <FontAwesome name="map-marker" size={24} color="black" />
+                            <Text style={{ justifyContent: 'center', fontWeight: 'bold' }}>Location</Text>
+                        </Pressable>
+                        <View style={{ backgroundColor: 'lightgray', borderRadius: 10,  justifyContent: 'space-around', alignItems: 'center', width: '40vw', height: '5vh' }}>
+                            <Text style={{ fontSize: 12, fontWeight: 'bold' }}>Hours: 6am - 10pm</Text>
+                            <Text style={{ fontSize: 12, fontWeight: 'bold' }}> YEAR ROUND</Text>
+                        </View>
+                    </View>
+                    <Text>Shaw’s Cove is a diver’s paradise, with vibrant marine life and stunning swim-throughs. Its expansive sandy beach offers both exploration and relaxation, making it a perfect escape for everyone, from seasoned divers to picnickers.</Text>
+                    <View style={styles.textSection}>
+                        <Text style={styles.subheading}>History</Text>
+                        <Text></Text>
+                        <Text></Text>
+                    </View>
+                    <View style={styles.textSection}>
+                        <Text style={styles.subheading}>Tidepools</Text>
+                        <View style={{ flexDirection: 'row', columnGap: 30 }}>
+                            <Text>The tidepool platforms are mostly composed of Monterey Formations of sandstone and siltstone. Formations created during the formation process can be seen inside the tidepools.</Text>
+                            <Image style={styles.imageSmall} source={Shaws} />
+                        </View>
+                    </View>
+                    <View>
+                        <Text style={styles.subheading}>How To Get There</Text>
+                        <Text style={{ marginVertical: 10 }}>Access Point to get to Shaw's Cove:</Text>
+                        <ul  >
+                            <li >Fairview St. & Cliff Dr. (stairs)</li>
+                        </ul>
+                        <Text style={{ fontWeight: '600' }}>Recommended Parking:</Text>
+                        <Text style={{ marginVertical: 10 }}>Residential Parking along Cliff Dr.</Text>
+                    </View>
+                    <View ref={map} style={styles.mapContainer}>
+                        <APIProvider apiKey={process.env.EXPO_PUBLIC_GOOGLE_MAPS_API_KEY}>
+                            <Map Zoom={14} Center={initial} gestureHandling="none"
+                                mapId={process.env.EXPO_PUBLIC_GOOGLE_MAP_ID} style={{ borderRadius: 20 }}>
+                            </Map>
+                        </APIProvider>
+                    </View>
+                    <View style={{ width: '70vw' }}>
+                        <Text style={styles.subheading}>Amenities</Text>
+                        <View style={{ flexDirection: 'row', width: '80vw', justifyContent: 'center' }}>
+                            <View style={[styles.grid1, { borderBottomWidth: 2 }]}>
+                                <Text style={{ width: '25vw', fontSize: '1rem', fontWeight: 'bold', textAlign: 'center' }}>Parking</Text>
+                                <Text style={{ width: '15vw', fontSize: '1.5rem', textAlign: 'center' }}>❌</Text>
+                            </View>
+                            <View style={[styles.grid2, { borderBottomWidth: 2 }]}>
+                                <Text style={{ width: '30vw', fontSize: '1rem', textAlign: 'center' }}>Street/Metered Parking</Text>
+                            </View>
+                        </View>
+                        <View style={{ flexDirection: 'row', width: '80vw', justifyContent: 'center' }}>
+                            <View style={[styles.grid1, { borderBottomWidth: 2}]}>
+                                <Text style={{ width: '25vw', fontSize: '1rem', fontWeight: 'bold', textAlign: 'center' }}>Bus Stop</Text>
+                                <Text style={{ width: '15vw', fontSize: '1.5rem', textAlign: 'center' }}>✅</Text>
+                            </View>
+                            <View style={[styles.grid2, {  borderBottomWidth: 2 }]}>
+                                <Text style={{ width: '30vw', fontSize: '1rem', textAlign: 'center' }}>N. Coast Hwy. Route 1-99</Text>
+                            </View>
+                        </View>
+                        <View style={{ flexDirection: 'row', width: '80vw', justifyContent: 'center' }}>
+                            <View style={[styles.grid1, { borderBottomWidth:2 }]}>
+                                <Text style={{ width: '25vw', fontSize: '1rem', fontWeight: 'bold', textAlign: 'center' }}>Trolley Stop </Text>
+                                <Text style={{ width: '15vw', fontSize: '1.5rem', textAlign: 'center' }}>✅</Text>
+                            </View>
+                            <View style={[styles.grid2, { borderBottomWidth: 2 }]}>
+                                <Text style={{ width: '30vw', fontSize: '1rem', textAlign: 'center' }}>1 and 6</Text>
+                            </View>
+                        </View>
+                        <View style={{ flexDirection: 'row', width: '80vw', justifyContent: 'center' }}>
+                            <View style={[styles.grid1, { borderBottomWidth:2 }]}>
+                                <Text style={{ width: '25vw', fontSize: '1rem', fontWeight: 'bold', textAlign: 'center' }}>Bathroom  </Text>
+                                <Text style={{ width: '15vw', fontSize: '1.5rem', textAlign: 'center' }}>❌</Text>
+                            </View>
+                            <View style={[styles.grid2, {  borderBottomWidth: 2 }]}>
+                                <Text style={{ width: '30vw', fontSize: '1em', textAlign: 'center' }}></Text>
+                            </View>
+                        </View>
+                        <View style={{ flexDirection: 'row', width: '80vw', justifyContent: 'center' }}>
+                            <View style={[styles.grid1]}>
+                                <Text style={{ width: '25vw', fontSize: 17, fontWeight: 'bold', textAlign: 'center' }}>Shower</Text>
+                                <Text style={{ width: '15vw', fontSize: 20, textAlign: 'center' }}>❌</Text>
+                            </View>
+                            <View style={[styles.grid2]}>
+                                <Text style={{ width: '30vw', fontSize: '1rem', textAlign: 'center' }}></Text>
+                            </View>
+                        </View>
                     </View>
                 </View>
-                <View style={{ backgroundColor: sand, width: '100vw', height: '5vh'}}></View>
-            </ScrollView>
+            </View>
+            <View style={{ backgroundColor: sand, width: '100vw', height: '5vh' }}></View>
         </View>
     );
 }
 
 styles = StyleSheet.create({
+    mapContainer: {
+        width:'80vw',
+        height:'20vh'
+    },
+    imageSmall: {
+        width: '30vw',
+        borderRadius: 20,
+        height: '30vw'
+    },
+    textSection: {
+        gap: 15
+    },
+    subheading: {
+        fontWeight: 'bold',
+        fontSize: 20
+    },
+    grid1: {
+        flexDirection: 'row',
+        borderColor: lightblue,
+        paddingLeft: '5vw',
+        borderRightWidth: 1,
+        justifyContent: 'space-evenly',
+        width: '40vw',
+        minHeight: '8vh',
+        alignItems: 'center'
+    },
+    grid2: {
+        borderColor: lightblue,
+        borderLeftWidth: 1,
+        paddingRight: '5vw',
+        width: '40vw',
+        textAlign: 'center',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    image: {
+        height: '25vh',
+        width: '80vw',
+        borderRadius: 20,
+        padding: 10,
+        alignSelf: 'center'
+    },
     outside: {
         backgroundColor: blue,
         minHeight: '85vh',
         minWidth: '100vw'
     },
     container: {
-        margin: 20,
+        margin: '5vw',
+        gap: 25,
         backgroundColor: 'white',
         borderRadius: 20,
-        paddingBottom: 20
+        padding: '5vw'
     },
     title: {
         color: '#064777',
