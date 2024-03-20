@@ -11,33 +11,35 @@ import FieldBG from '../assets/NewField.svg'
 const sand = '#e3c088';
 const lightblue = '#68c8cb';
 const blue = '#3a899b';
-const darkblue = '#191516';
+const darkblue = '#1A526B';
 //
 export default function HomePage() {
-  return (
-    <View>
-        <Navbar/>
-        <Link href="/map" asChild>
-        <Pressable style={styles.map}>
-            <MapBG width={Dimensions.get("screen").width} height={Dimensions.get('screen').width*1.4}/>
-            <Text style={[styles.text, { left: '5%' }]}>Explore Map</Text>
-        </Pressable>
-        </Link>
-        <Link href="/guidebook/" asChild>
-        <Pressable style={styles.guide}>
-            <FieldBG width={Dimensions.get("screen").width} height={Dimensions.get('screen').width}/>
-            <Text style={[styles.text, { left: '55%' }]}>Field Guide</Text>
-        </Pressable>
-        </Link>
-        <Pressable style={styles.log}>
-            <LogBG width={Dimensions.get("screen").width} height={Dimensions.get('screen').width*1.23}>
-            </LogBG>
-        </Pressable>
-        
-        <View style={styles.footer} />
-        <Chart/>
-    </View>
-  );
+    return (
+        <View>
+            <Navbar />
+
+            <Link href="/map" asChild>
+                <Pressable style={styles.map}>
+                    <MapBG width={Dimensions.get("screen").width} height={Dimensions.get('screen').width * 1.4} />
+                    <Text style={[styles.text, { left: '5%' }]}>Explore Map</Text>
+                </Pressable>
+            </Link>
+            <Link href="/guidebook/" asChild>
+                <Pressable style={styles.guide}>
+                    <FieldBG width={Dimensions.get("screen").width} height={Dimensions.get('screen').width} />
+                    <Text style={[styles.text, { left: '55%' }]}>Field Guide</Text>
+                </Pressable>
+            </Link>
+            <View style={{ width: '100vw', height: '50vh', top: '40vh', backgroundColor: '#113545' }}></View>
+            <Pressable style={styles.log}>
+                <LogBG width={Dimensions.get("screen").width} height={Dimensions.get('screen').width}>
+                </LogBG>
+            </Pressable>
+            <View style={styles.footer} />
+
+            <Chart />
+        </View>
+    );
 }
 const styles = StyleSheet.create({
     page: {
@@ -50,27 +52,26 @@ const styles = StyleSheet.create({
     },
     guide: {
         position: 'absolute',
-        top: '20vh'
+        top: '18.5vh'
     },
     log: {
         position: 'absolute',
-        top: '35vh',
-        width: '100vw'
+        top: '35vh'
     },
     text: {
         position: 'absolute',
         color: 'white',
         fontSize: 30,
-        fontWeight:'bold',
+        fontWeight: 'bold',
         top: '5vh',
         left: '10vh'
     },
     footer: {
         position: 'absolute',
         top: '80vh',
-        borderTopLeftRadius:50,
-        borderTopRightRadius:50,
-        height: '28vh',
+        borderTopLeftRadius: 50,
+        borderTopRightRadius: 50,
+        height: '20vh',
         width: '100vw',
         backgroundColor: sand
     }

@@ -1,9 +1,12 @@
 import Navbar from "./components/navbar";
 import { Pressable, StyleSheet, View, Text } from "react-native";
-import MapView from '@teovilla/react-native-web-maps';
-import { APIProvider, Map, Marker } from '@vis.gl/react-google-maps';
+import { APIProvider, Map, AdvancedMarker } from '@vis.gl/react-google-maps';
+import { Polygon } from "./components/polygon";
 import { AntDesign } from '@expo/vector-icons';
+import * as ImagePicker from 'expo-image-picker';
 import { useState } from 'react';
+import Form from "./components/form";
+import Context from "./components/context";
 
 const sand = '#e3c088';
 const lightblue = '#68c8cb';
@@ -11,21 +14,125 @@ const blue = '#3a899b';
 const darkblue = '#191516a';
 
 export default function MapPage() {
+    const [image, setImage] = useState(null);
+    const [form, setForm] = useState(false);
+    const [location, setLocation] = useState(false);
+    const [name, setName] = useState(null);
+    const [context, setContext] = useState(false);
+    const [status, requestPermission] = ImagePicker.useCameraPermissions();
+
+    const pickImageAsync = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            allowsEditing: true,
+            quality: 1,
+        });
+
+        if (!result.canceled) {
+            setImage(result.assets[0].uri);
+            formPress();
+        } else {
+            alert('You did not select any image.');
+        }
+    };
+
+    const takeImageAsync = async () => {
+        let result = await ImagePicker.requestCameraPermissionsAsync();
+        if (result.granted) {
+            let photo = await ImagePicker.launchCameraAsync();
+            if (!photo.canceled) {
+                setImage(photo.assets[0].uri);
+                formPress();
+            } else {
+                alert('You did not select any image.')
+            }
+        }
+    }
+
+    const formPress = () => {
+        setForm(!form);
+    }
+
+    const contextPress = () => {
+        setContext(!context);
+    }
+
+    const calloutPress = loc => {
+        setName(loc);
+        locPress();
+    }
+
+    const locPress = () => {
+        setLocation(!location);
+    }
+
+    const initial = { lat: 33.535640952240556, lng: -117.7782005607177 };
+    const heisler = { lat: 33.542717357425645, lng: -117.78775366836816 };
+    const treasure = { lat: 33.51217204824447, lng: -117.75471398882044 };
+    const goff = { lat: 33.5144401925707, lng: -117.76024766002828 };
+    const shaws = { lat: 33.54570202275875, lng: -117.79838512444839 };
+    const wood = { lat: 33.52668289323503, lng: -117.7705841649269 };
+    const crescent = { lat: 33.54661984078583, lng: -117.8015687552509 };
     return (
         <View>
             <Navbar />
-            <View style={{ backgroundColor: blue, minHeight: '90vh' }}>
+            <View style={{ backgroundColor: blue, height: '90vh' }}>
                 <View style={styles.container}>
-                    <APIProvider apiKey={process.env.GOOGLE_MAPS_API_KEY}>
-                        <Map defaultCenter={{ lat: 22.54992, lng: 0 }}
-                            defaultZoom={3}
-                            gestureHandling={'greedy'}
-                            disableDefaultUI={true}>
+                    <APIProvider apiKey={process.env.EXPO_PUBLIC_GOOGLE_MAPS_API_KEY}>
+                        <Map defaultZoom={12} defaultCenter={initial} mapTypeControl={false} streetViewControl={false} zoomControl={false}
+                            mapId={process.env.EXPO_PUBLIC_GOOGLE_MAP_ID} style={{ borderRadius: 20 }}>
+                            <AdvancedMarker position={heisler}></AdvancedMarker>
+                            <AdvancedMarker position={treasure}></AdvancedMarker>
+                            <AdvancedMarker position={wood}></AdvancedMarker>
+                            <AdvancedMarker position={shaws}></AdvancedMarker>
+                            <AdvancedMarker position={goff}></AdvancedMarker>
+                            <AdvancedMarker position={crescent}></AdvancedMarker>
+                            <Polygon fillColor="rgba(128,0,128)" strokeWeight={1} paths={[{ lat: 33.501662749630415, lng: -117.74394829807281 },
+                            { lat: 33.51010784053889, lng: -117.7513786777854 },
+                            { lat: 33.51350654233734, lng: -117.75599341839552 },
+                            { lat: 33.54289254369832, lng: -117.7843165397644 },
+                            { lat: 33.54844469589551, lng: -117.80504163354635 },
+                            { lat: 33.50191694448255, lng: -117.79865495860577 }]} />
+                            <Polygon fillColor="rgba(255,0,0,.8)" strokeWeight={1} paths={[{ lat: 33.54844469589551, lng: -117.80504163354635 },
+                            { lat: 33.5765423603528, lng: -117.8419528529048 },
+                            { lat: 33.597069886301014, lng: -117.87875175476074 },
+                            { lat: 33.59112518193325, lng: -117.87873063236475 },
+                            { lat: 33.5419121648292, lng: -117.80427049845457 }]} />
+                            <Polygon fillColor="rgba(255,0,0,.8)" strokeWeight={1} paths={[{ lat: 33.501662749630415, lng: -117.74394829807281 },
+                            { lat: 33.483416258162265, lng: -117.72487711161375 },
+                            { lat: 33.46106071867834, lng: -117.7086041495204 },
+                            { lat: 33.456739081173, lng: -117.71434474736452 },
+                            { lat: 33.50163233818496, lng: -117.74752534925938 }]} />
                         </Map>
                     </APIProvider>
                 </View>
+                <Pressable style={styles.contextButton} onPress={contextPress}>
+                    <AntDesign name="question" size={34} color="white" />
+                </Pressable>
+                <Pressable style={styles.mpabutton} onPress={pickImageAsync}>
+                    <AntDesign name="picture" size={44} color="white" />
+                </Pressable>
+                <Pressable style={styles.cambutton} onPress={takeImageAsync}>
+                    <AntDesign name="camerao" size={74} color="white" />
+                </Pressable>
+                <Pressable style={styles.formbutton} onPress={formPress}>
+                    <AntDesign name="form" size={44} color="white" />
+                </Pressable>
+                <View style={styles.legend}>
+                    <View style={{ flexDirection: 'row' }}>
+                        <Text>Map Key</Text>
+                    </View>
+                    <View style={{ flexDirection: 'row' }}>
+                        <View style={[styles.legendBubble, { backgroundColor: 'red' }]} />
+                        <Text> No take Zone</Text>
+                    </View>
+                    <View style={{ flexDirection: 'row' }}>
+                        <View style={[styles.legendBubble, { backgroundColor: 'purple' }]} />
+                        <Text> Limited take Zone</Text>
+                    </View>
+                </View>
+                <Form contents={form} image={image} onClose={formPress} />
+                <Context contents={context} onClose={contextPress} />
             </View>
-            <View style={styles.footer} />
         </View>
     );
 }
@@ -36,11 +143,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         justifySelf: 'center',
         alignItems: 'center',
-        display: 'grid',
         height: '80vh',
         margin: 30,
         width: '80vw',
-        backgroundColor: 'grey',
         borderRadius: 20
 
     },
@@ -55,12 +160,12 @@ const styles = StyleSheet.create({
         position: 'absolute',
         backgroundColor: 'rgba(17, 53, 69, 0.6)',
         borderRadius: 20,
-        height: '12%',
+        height: '12vh',
         width: '40%',
         justifyContent: 'center',
         gap: 10,
-        top: '5%',
-        left: '11%',
+        top: '5vh',
+        left: '11vw',
         padding: 8,
     },
     legendBubble: {
@@ -83,8 +188,8 @@ const styles = StyleSheet.create({
         width: 60,
         justifyContent: 'center',
         alignItems: 'center',
-        top: '2%',
-        left: '80%'
+        top: '2vh',
+        left: '80vw'
     },
     formbutton: {
         position: 'absolute',
@@ -94,8 +199,8 @@ const styles = StyleSheet.create({
         width: 70,
         justifyContent: 'center',
         alignItems: 'center',
-        top: '82%',
-        left: '65%'
+        top: '80vh',
+        left: '65vw'
 
     },
     mpabutton: {
@@ -106,8 +211,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         height: 70,
         width: 70,
-        top: '82%',
-        left: '20%'
+        top: '80vh',
+        left: '20vw'
 
     },
     cambutton: {
@@ -118,8 +223,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#035252',
         height: 110,
         width: 110,
-        top: '75%',
-        left: '37%'
+        top: '74vh',
+        left: '37vw'
     }
 
 });
