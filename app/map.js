@@ -1,9 +1,10 @@
 import Navbar from "./components/navbar";
-import { Pressable, StyleSheet, View, Text } from "react-native";
-import { APIProvider, Map, AdvancedMarker } from '@vis.gl/react-google-maps';
+import { Pressable, StyleSheet, View, Text,Image } from "react-native";
+import { APIProvider, Map, AdvancedMarker, InfoWindow } from '@vis.gl/react-google-maps';
 import { Polygon } from "./components/polygon";
 import { AntDesign } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
+import { Link } from "expo-router";
 import { useState } from 'react';
 import Form from "./components/form";
 import Context from "./components/context";
@@ -19,6 +20,12 @@ export default function MapPage() {
     const [location, setLocation] = useState(false);
     const [name, setName] = useState(null);
     const [context, setContext] = useState(false);
+    const [open, setOpen] = useState(false);
+    const [locImage,setlocImage]=useState(null);
+    const [position,setPosition]=useState(null);
+    const [locName,setlocName]=useState("");
+    const [loclink,setloclink]=useState("");
+
     const [status, requestPermission] = ImagePicker.useCameraPermissions();
 
     const pickImageAsync = async () => {
@@ -80,12 +87,12 @@ export default function MapPage() {
                     <APIProvider apiKey={process.env.EXPO_PUBLIC_GOOGLE_MAPS_API_KEY}>
                         <Map defaultZoom={12} defaultCenter={initial} mapTypeControl={false} streetViewControl={false} zoomControl={false}
                             mapId={process.env.EXPO_PUBLIC_GOOGLE_MAP_ID} style={{ borderRadius: 20 }}>
-                            <AdvancedMarker position={heisler}></AdvancedMarker>
-                            <AdvancedMarker position={treasure}></AdvancedMarker>
-                            <AdvancedMarker position={wood}></AdvancedMarker>
-                            <AdvancedMarker position={shaws}></AdvancedMarker>
-                            <AdvancedMarker position={goff}></AdvancedMarker>
-                            <AdvancedMarker position={crescent}></AdvancedMarker>
+                            <AdvancedMarker position={heisler} onClick={() => {setloclink("guidebook/heislerpark");setOpen(true);setPosition(heisler); setlocName("Heisler Park"); setlocImage("../assets/heisler.jpg")}}></AdvancedMarker>
+                            <AdvancedMarker position={treasure} onClick={() =>{setloclink("guidebook/treasureisland");setOpen(true);setPosition(treasure); setlocName("Treasure Island"); setlocImage("../assets/treasureisland.jpg")}}></AdvancedMarker>
+                            <AdvancedMarker position={wood} onClick={() => {setloclink("guidebook/woodcove");setOpen(true); setPosition(wood); setlocName("Wood's Cove"); setlocImage("../assets/woods.jpg")}}></AdvancedMarker>
+                            <AdvancedMarker position={shaws} onClick={() => {setloclink("guidebook/shawscove");setOpen(true);setPosition(shaws); setlocName("Shaw's Cove"); setlocImage("../assets/shaws.jpg")}}></AdvancedMarker>
+                            <AdvancedMarker position={goff} onClick={() => {setloclink("guidebook/goffisland");setOpen(true);setPosition(goff); setlocName("Goff's Cove"); setlocImage("../assets/Goff.jpg")}}></AdvancedMarker>
+                            <AdvancedMarker position={crescent} onClick={() => {setloclink("guidebook/crescentbay");setOpen(true);setPosition(crescent); setlocName("Crescent Bay"); setlocImage("../assets/crescent.jpg")}}></AdvancedMarker>
                             <Polygon fillColor="rgba(128,0,128)" strokeWeight={1} paths={[{ lat: 33.501662749630415, lng: -117.74394829807281 },
                             { lat: 33.51010784053889, lng: -117.7513786777854 },
                             { lat: 33.51350654233734, lng: -117.75599341839552 },
@@ -102,6 +109,27 @@ export default function MapPage() {
                             { lat: 33.46106071867834, lng: -117.7086041495204 },
                             { lat: 33.456739081173, lng: -117.71434474736452 },
                             { lat: 33.50163233818496, lng: -117.74752534925938 }]} />
+                            {open && (
+                                <Pressable onClick={() => alert("hi!")} >
+                                    <InfoWindow position={position} onCloseClick={() => setOpen(false)}>
+                                        <Link href={loclink}>
+                                            <View style={{ flexDirection: 'row', flex: 1, padding: 0, alignContent: 'center',gap:5 }}>
+                                                <Image source={locImage} style={styles.image} />
+                                                <View style={{ gap: 2 }}>
+                                                    <Text>{locName}</Text>
+                                                    <Text> - Miles Away</Text>
+                                                    <Text> Commonly found:</Text>
+                                                    <View style={{ width: '15vw', height: '2vh', flexDirection: 'row', gap: 3, justifyContent: 'center' }}>
+                                                        <View style={styles.orgs}></View>
+                                                        <View style={styles.orgs}></View>
+                                                        <View style={styles.orgs}></View>
+                                                    </View>
+                                                </View>
+                                            </View>
+                                        </Link>
+                                    </InfoWindow>
+                                </Pressable>
+                            )}
                         </Map>
                     </APIProvider>
                 </View>
@@ -138,6 +166,20 @@ export default function MapPage() {
 }
 
 const styles = StyleSheet.create({
+    orgs: {
+        height: "2vh",
+        width: "3.5vw",
+        backgroundColor: 'gray',
+        borderRadius: 40
+    },
+    image: {
+        height: '10vh',
+        width: '15vw',
+        alignSelf: 'center',
+        marginTop: '20',
+        borderWidth: 1,
+        borderRadius: 10
+    },
     container: {
         alignSelf: 'center',
         justifyContent: 'center',
