@@ -17,7 +17,7 @@ export default function TideCharts() {
                     <View style={styles.container}>
                         <Text style={styles.title}>Tide Charts</Text>
                         <View style={styles.line}></View>
-                        <Text style={styles.item}>Tide Charts are a great way to see how high or low the water level is going to be on any given day. When the tide chart is low, the water level will be lower meaning that more of the tidepools will be accessible to visit and explore, while a higher tide means that much of the tidepool may be submerged or inaccessible.</Text>
+                        <Text style={styles.item}>Tide Charts area great way to see how high or low the water level is going to be on any given day. When the tide chart is low, the water level will be lower meaning that more of the tidepools will be accessible to visit and explore, while a higher tide means that much of the tidepool may be submerged or inaccessible.</Text>
                     </View>
                 </View>
                 <View style={{ backgroundColor: sand, width: '100vw', height: '5vh' }}></View>
@@ -36,7 +36,7 @@ styles = StyleSheet.create({
     container: {
         margin: 20,
         backgroundColor: 'white',
-        borderRadius: '20',
+        borderRadius:20,
         flex: 1,
         height: "80vh",
         width: "90vw"

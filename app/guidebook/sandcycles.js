@@ -36,7 +36,7 @@ styles = StyleSheet.create({
     container: {
         margin: 20,
         backgroundColor: 'white',
-        borderRadius: '20',
+        borderRadius: 20,
         flex: 1,
         height: "80vh",
         width: "90vw"

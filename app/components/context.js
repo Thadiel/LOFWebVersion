@@ -15,8 +15,11 @@ export default function Context({ contents, onClose }) {
                         <Pressable onPress={onClose}>
                             <AntDesign name="close" size={28} color="black" />
                         </Pressable>
+                        
                     </View>
                 </View>
+                <Text style={{margin:'3vh', marginBottom:'.5vh'}}> Hi there! What you're looking at right now is the map of the Laguna Ocean area! The areas that are highlighted with Red are considered No Take Zone and so taking animals are organisms from these areas are not allowed, while the purple areas are limited take with their own rules and regulations so double check before visiting these areas!</Text>
+                <Text style={{margin:'3vh', marginTop:'.5vh'}}> Highlighted on the map are the locations of our tidepools, just be sure to click on any of these markers twice to get additional information as well as visit the location page for info such as accessibility options and the history of the site!</Text>
             </View>
         </Modal>
     )

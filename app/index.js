@@ -31,10 +31,13 @@ export default function HomePage() {
                 </Pressable>
             </Link>
             <View style={{ width: '100vw', height: '50vh', top: '40vh', backgroundColor: '#113545' }}></View>
-            <Pressable style={styles.log}>
-                <LogBG width={Dimensions.get("screen").width} height={Dimensions.get('screen').width}>
-                </LogBG>
-            </Pressable>
+            <Link href="/log" asChild>
+                <Pressable style={styles.log}>
+                    <LogBG width={Dimensions.get("screen").width} height={Dimensions.get('screen').width}>
+                    </LogBG>
+                    <Text style={[styles.text, { left: '5%',top:'10%' }]}>Log Book</Text>
+                </Pressable>
+            </Link>
             <View style={styles.footer} />
 
             <Chart />
@@ -56,7 +59,7 @@ const styles = StyleSheet.create({
     },
     log: {
         position: 'absolute',
-        top: '35vh'
+        top: '32vh'
     },
     text: {
         position: 'absolute',
